@@ -1,26 +1,53 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container column">
+    <!--    Блок с контролом-->
+    <app-control
+      @change="updateResult"
+    >
+
+    </app-control>
+
+    <!--Блок с резюме    -->
+    <app-result
+      :infoBlocks="update"
+    >
+
+    </app-result>
+
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppControl from './components/AppControl.vue';
+import AppResult from './components/AppResult.vue';
 
 export default {
-  name: 'App',
+  data(){
+    return{
+      update: []
+    }
+  },
+  methods: {
+    updateResult(data){
+      this.update.push(data);
+    }
+  },
   components: {
-    HelloWorld
+    'app-control': AppControl,
+    'app-result': AppResult
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style>
+  .avatar {
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar img {
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+  }
 </style>
